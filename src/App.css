@@ -21,9 +21,8 @@ body {
     align-items: center;
     justify-content: space-around;
     z-index: 99;
-    padding: 10px;
     box-sizing: border-box;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -32,8 +31,9 @@ body {
     align-items: center;
     background-color: #192a56;
     color: rgb(251, 155, 0);
-    font-weight: 900;
-    padding: 5px 8px;
+    font-weight: bold;
+    font-size: small;
+    padding: 2px 3px;
 }
 
 .App section {
