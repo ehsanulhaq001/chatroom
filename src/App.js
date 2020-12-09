@@ -21,13 +21,17 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+// let globalPhotoURL = "";
+
 function App() {
   const [user] = useAuthState(auth);
 
   return (
     <div className="App">
       <header>
-        <h1>my chat room</h1>
+        <div>
+          <pre>my_chat_room__</pre>
+        </div>
         <SignOut />
       </header>
 
@@ -46,7 +50,12 @@ function SignIn() {
 
 function SignOut() {
   return (
-    auth.currentUser && <button onClick={() => auth.signOut()}>Sign out</button>
+    auth.currentUser && (
+      <button className="signOut" onClick={() => auth.signOut()}>
+        {auth.currentUser && <img src={auth.currentUser.photoURL} alt="pic" />}
+        Sign out
+      </button>
+    )
   );
 }
 
@@ -54,7 +63,7 @@ function ChatRoom() {
   const dummy = useRef();
 
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt").limit(25);
+  const query = messagesRef.orderBy("createdAt");
   const [messages] = useCollectionData(query, { idField: "id" });
 
   const [formValue, setFormValue] = useState("");
@@ -98,6 +107,7 @@ function ChatRoom() {
 
 function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
+  // globalPhotoURL = photoURL;
 
   const messagesClass = uid === auth.currentUser.uid ? "sent" : "received";
 
