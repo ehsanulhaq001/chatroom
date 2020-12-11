@@ -166,8 +166,16 @@ p {
 
 .received p {
     background: var(--rec);
-    color: white;
+    mix-blend-mode: luminosity;
     border-radius: 10px 20px 20px 10px;
+}
+
+.received p span {
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: invert(1) grayscale(1) contrast(99);
 }
 
 img {
