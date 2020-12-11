@@ -165,8 +165,8 @@ p {
 }
 
 .received p {
-    background: #f8c291;
-    color: black;
+    background: var(--rec);
+    color: white;
     border-radius: 10px 20px 20px 10px;
 }
 
@@ -175,4 +175,17 @@ img {
     height: 40px;
     border-radius: 10%;
     margin: 2px 5px;
+}
+
+@media only screen and (max-height: 900px) {
+    form button {
+        font-size: 2rem;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .App header {
+        font-size: 1rem;
+    }
 }

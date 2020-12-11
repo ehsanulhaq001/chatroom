@@ -63,14 +63,14 @@ function ChatRoom() {
   const dummy = useRef();
 
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt", "desc").limit(5);
+  const query = messagesRef.orderBy("createdAt", "desc").limit(25);
   const [messages] = useCollectionData(query, { idField: "id" });
 
   const [formValue, setFormValue] = useState("");
 
   const sendMessage = async (e) => {
-    //normally when a form is submitted it refreshes the page, but
-    e.preventDefault(); // prevents it
+    //normally when a form is submitted it refreshes the page, but this prevents it
+    e.preventDefault();
 
     const { uid, photoURL } = auth.currentUser;
 
@@ -108,15 +108,37 @@ function ChatRoom() {
   );
 }
 
+let users = [];
+let colors = [
+  "#00a8ff",
+  "#9c88ff",
+  "#fbc531",
+  "#4cd137",
+  "#487eb0",
+  "#e84118",
+  "#273c75",
+];
+
 function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
   // globalPhotoURL = photoURL;
 
   const messagesClass = uid === auth.currentUser.uid ? "sent" : "received";
 
+  if (!users.includes((user) => user.uid === uid)) {
+    users.push({
+      uid: uid,
+      i: Math.floor(Math.random() * 7),
+    });
+  }
+  let thisUser = users.find((user) => user.uid === uid);
+  let bg = {
+    "--rec": colors[thisUser.i],
+  };
+
   return (
     <>
-      <div className={`message ${messagesClass}`}>
+      <div className={`message ${messagesClass}`} style={bg}>
         <img src={photoURL} alt="pic" />
         <p>{text}</p>
       </div>
