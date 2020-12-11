@@ -117,30 +117,51 @@ let colors = [
   "#487eb0",
   "#e84118",
   "#273c75",
+  "#eccc68",
+  "#ff7f50",
+  "#ff6b81",
+  "#a4b0be",
 ];
+
+function getColorIndex(i) {
+  i++;
+  if (i > 3) return 0;
+  let isPresent = 0;
+  let index = Math.floor(Math.random() * colors.length);
+  users.forEach((user) => {
+    if (user.colorIndex === index) {
+      isPresent = 1;
+    }
+  });
+  if (isPresent) {
+    getColorIndex();
+  }
+  return index;
+}
 
 function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
-  // globalPhotoURL = photoURL;
 
   const messagesClass = uid === auth.currentUser.uid ? "sent" : "received";
 
-  if (!users.includes((user) => user.uid === uid)) {
+  if (users.findIndex((user) => user.uid === uid) === -1) {
     users.push({
       uid: uid,
-      i: Math.floor(Math.random() * 7),
+      colorIndex: getColorIndex(0),
     });
   }
   let thisUser = users.find((user) => user.uid === uid);
   let bg = {
-    "--rec": colors[thisUser.i],
+    "--rec": colors[thisUser.colorIndex],
   };
-
+  console.log(users);
   return (
     <>
       <div className={`message ${messagesClass}`} style={bg}>
         <img src={photoURL} alt="pic" />
-        <p>{text}</p>
+        <p>
+          <span>{text}</span>
+        </p>
       </div>
     </>
   );
