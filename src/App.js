@@ -63,13 +63,14 @@ function ChatRoom() {
   const dummy = useRef();
 
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt");
+  const query = messagesRef.orderBy("createdAt", "desc").limit(5);
   const [messages] = useCollectionData(query, { idField: "id" });
 
   const [formValue, setFormValue] = useState("");
 
   const sendMessage = async (e) => {
-    e.preventDefault();
+    //normally when a form is submitted it refreshes the page, but
+    e.preventDefault(); // prevents it
 
     const { uid, photoURL } = auth.currentUser;
 
@@ -90,7 +91,9 @@ function ChatRoom() {
       <main>
         <div>
           {messages &&
-            messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+            messages
+              .sort((a, b) => a.createdAt > b.createdAt)
+              .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
         </div>
         <div ref={dummy}></div>
       </main>
