@@ -1,11 +1,9 @@
 import React from "react";
 import "./App.css";
 import ChatRoom from "./components/chatroom.js";
-
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-
 import { useAuthState } from "react-firebase-hooks/auth";
 
 firebase.initializeApp({
