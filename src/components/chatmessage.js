@@ -21,7 +21,7 @@ let colors = [
 
 function ChatMessage(props) {
   const { auth } = props;
-  const { text, uid, photoURL } = props.message;
+  const { text, uid, photoURL, createdAt } = props.message;
 
   //sets the class sent or received based on if the author is the current user or other
 
@@ -43,14 +43,36 @@ function ChatMessage(props) {
   let bg = {
     "--rec": colors[thisUser.colorIndex],
   };
+  let timestamp;
+  let time = "";
+  let date = "";
+  let ampm = "am";
+  if (createdAt) {
+    timestamp = createdAt.toDate().toString().split(" ");
+    time = timestamp[4].split(":").slice(0, 2); //xx:xx
+    if (time[0] >= 12) {
+      ampm = "pm";
+      if (time[0] > 12) {
+        time[0] -= 12;
+      }
+    }
+    date = timestamp[2] + " " + timestamp[1];
+  }
 
   return (
     <>
-      <div className={`message ${messagesClass}`} style={bg}>
+      <div className={`message ${messagesClass}`}>
         <img src={photoURL} alt="pic" />
-        <p>
-          <span>{text}</span>
-        </p>
+        <div>
+          <div className="textHolderHolder">
+            <div className="textHolder" style={bg}>
+              <span>{text}</span>
+            </div>
+          </div>
+          <pre className="timeAndDate">
+            {" " + time[0] + ":" + time[1] + " " + ampm + " " + date}
+          </pre>
+        </div>
       </div>
     </>
   );
