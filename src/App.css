@@ -1,5 +1,14 @@
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             background-color: #05122c;
+            background-image: url('./bg.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
         
         .App {
@@ -57,6 +66,9 @@
             display: flex;
             flex-direction: column;
             scroll-behavior: smooth;
+            border: none;
+            border-left: 0.25rem solid #273c75;
+            box-sizing: border-box;
         }
         
         main::-webkit-scrollbar {
@@ -94,16 +106,54 @@
             transform: scale(1.1);
         }
         
+        form>label {
+            position: relative;
+            width: 100%;
+            max-width: 728px;
+            display: flex;
+            font-size: 1.5rem;
+            overflow: hidden;
+            align-items: center;
+            background: #353b48e0;
+            border-radius: 0 20px 0 0;
+        }
+        
+        form>label>span {
+            background-color: #272c35;
+            color: rgba(255, 255, 255, 0.452);
+            padding: 10px;
+            margin: 10px;
+            border-radius: 4px;
+        }
+        
         input {
             line-height: 1.5;
             width: 100%;
+            height: 100%;
             font-size: 1.5rem;
-            background: #353b48e0;
             color: white;
             outline: none;
             border: none;
             padding: 0 10px;
-            border-radius: 0 20px 0 0;
+            background: transparent;
+        }
+        
+        form>label::after {
+            position: absolute;
+            content: '';
+            left: 50%;
+            /* right: 0; */
+            bottom: 0;
+            width: 0%;
+            height: 0.15rem;
+            background-color: indianred;
+            transition: all 300ms ease-in-out;
+        }
+        
+        form>label:hover::after,
+        form>label:focus-within::after {
+            left: 0%;
+            width: 100%;
         }
         
         button {

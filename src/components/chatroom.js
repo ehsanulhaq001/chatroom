@@ -63,10 +63,18 @@ function ChatRoom(props) {
         <div id="hhh" ref={dummy}></div>
       </main>
       <form onSubmit={sendMessage}>
-        <input
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-        />
+        <label htmlFor="">
+          <input
+            value={formValue}
+            maxLength="50"
+            onChange={(e) => {
+              setFormValue(e.target.value);
+              document.getElementById("counter").innerHTML =
+                e.target.maxLength - e.target.value.length;
+            }}
+          />
+          <span id="counter">50</span>
+        </label>
         <button type="submit">🕊️</button>
       </form>
     </>
