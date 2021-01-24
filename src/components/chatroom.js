@@ -32,8 +32,10 @@ function ChatRoom(props) {
     });
 
     //refreshes formvalue to empty
+    //and character count to max-limit
 
     setFormValue("");
+    document.getElementById("counter").innerHTML = "50";
 
     //deletes the firestore documents when collectoin length exceeds the limit
     //in order to reduce total reads afterwards writes and deletes go together
