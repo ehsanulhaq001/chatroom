@@ -92,7 +92,6 @@ function getColorIndex(i) {
   users.forEach((user) => {
     if (user.colorIndex === index) {
       isPresent = 1;
-      console.log("same");
     }
   });
 
