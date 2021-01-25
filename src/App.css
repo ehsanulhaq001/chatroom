@@ -142,7 +142,6 @@
             position: absolute;
             content: '';
             left: 50%;
-            /* right: 0; */
             bottom: 0;
             width: 0%;
             height: 0.15rem;
@@ -225,14 +224,15 @@
             background: var(--rec);
             mix-blend-mode: normal;
             border-radius: 10px 20px 20px 10px;
+            color: white;
         }
         
         .received .textHolderHolder .textHolder span {
-            background: inherit;
+            /* background: inherit;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            filter: invert(1) grayscale(1) contrast(99);
+            filter: invert(1) grayscale(1) contrast(99); */
         }
         
         .sent .timeAndDate {
